@@ -1,9 +1,18 @@
 ---
+import Navbar from '../components/Navbar.astro';
+import NavbarItem from '../components/NavbarItem.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="">
 	<main>
+		<Navbar>
+			<NavbarItem 
+				description="Home"
+				icon="fa-icon"
+				href="./"
+			/>
+		</Navbar>
 	</main>
 </Layout>
 
