@@ -52,6 +52,17 @@ export default {
 				'h6': {
 					fontSize: theme('fontSize.base'),
 				},
+				'p': {
+					fontSize: theme('fontSize.base'),
+					color: theme('colors.black'),
+				},
+				'a': {
+					fontSize: theme('fontSize.base'),
+					color: theme('colors.blue-400'),
+				},
+				'.avatar': {
+					borderRadius: theme('borderRadius.full'),
+				},
 			});
 		},
 	],
