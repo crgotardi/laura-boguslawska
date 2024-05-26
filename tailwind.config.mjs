@@ -63,6 +63,17 @@ export default {
 				'.avatar': {
 					borderRadius: theme('borderRadius.full'),
 				},
+				'.navbar-item': {
+					color: theme('colors.black'),
+				},
+				'.navbar-item:hover': {
+					color: theme('colors.blue-400'),
+					fontWeight: theme('fontWeight.bold')
+				},
+				'.navbar-item__active': {
+					color: theme('colors.blue-400'),
+					fontWeight: theme('fontWeight.bold')
+				},
 			});
 		},
 	],

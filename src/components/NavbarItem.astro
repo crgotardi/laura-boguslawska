@@ -1,23 +1,33 @@
 ---
 interface Props {
     description: string;
-    icon?: string;
     href?: string;
-    active: boolean;
+    isActive: boolean;
 }
 
-const { description, icon, href } = Astro.props;
+const { description, href, isActive } = Astro.props;
 ---
 
 <li>
-    { icon }
-    <a href={ href }>
+    { <icon /> }
+    <a 
+        href={ href } 
+        class:list={
+            [
+                'navbar-item',
+                'transition-all',
+                'ease-in-out',
+                'delay-75',
+                { 'navbar-item__active': isActive }
+            ]
+        }
+    >
         { description } 
     </a>
 </li>
 
 <style>
     li {
-        padding: 1rem 1.5rem;
+        padding: 0.5rem 1rem;
     }
 </style>
