@@ -1,35 +1,16 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import NavbarItem from '../components/NavbarItem.astro';
+import MenuItems from '../data/navbar';
+import Sidebar from '../components/Sidebar.astro';
+import SidebarIcon from '../components/SidebarIcon.astro';
+import SidebarIcons from '../data/sidebar';
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
-
-const MENU_ITEMS = [
-	{
-		description: 'Home',
-		href:'/',
-	},
-	{
-		description: 'About me',
-		href:'/about-me',
-	},
-	{
-		description: 'Gallery',
-		href:'/gallery',
-	},
-	{
-		description: 'Poems',
-		href:'/poems',
-	},
-	{
-		description: 'Contact me',
-		href:'/contact-me',
-	},
-]
 ---
 
 <!doctype html>
@@ -45,9 +26,9 @@ const MENU_ITEMS = [
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Niramit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 	</head>
-	<body>
+	<body class="bg-paper-100">
 		<Navbar>
-			{MENU_ITEMS.map((item) => 
+			{MenuItems.map((item) => 
 				<NavbarItem 
 					description={item.description}
 					href={item.href}
@@ -56,6 +37,14 @@ const MENU_ITEMS = [
 			)}
 		</Navbar>
 		<slot />
+		<Sidebar>
+			{SidebarIcons.map((item) => 
+				<SidebarIcon 
+					iconName={item.iconName}
+					href={item.href}
+				/>
+			)}
+		</Sidebar>
 	</body>
 </html>
 <style is:global>

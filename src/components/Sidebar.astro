@@ -1,0 +1,20 @@
+<aside>
+    <slot />
+</aside>
+
+<style>
+    aside {
+        position: fixed;
+        top: 5rem;
+        right: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        width: 5.625rem;
+        height: calc(100dvh - 5rem);
+        padding: 3rem;
+        background: url(../assets/sidebar-background.png);
+    }
+</style>

@@ -1,0 +1,22 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+    iconName: string;
+    href: string;
+}
+
+const { iconName, href } = Astro.props;
+---
+
+<a 
+    href={ href }
+    target="_blank"
+>
+    <Icon 
+        name={`mdi:${iconName}`}
+        class="text-paper-100 cursor-pointer"
+        width={30}
+        height={30}
+    />
+</a>
