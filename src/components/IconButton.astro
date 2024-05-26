@@ -1,0 +1,67 @@
+---
+import { Icon } from 'astro-icon/components'
+
+type ButtonSize = 'sm' | 'md' | 'lg';
+
+type ButtonType = 'primary' | 'secondary';
+
+interface Props {
+    iconName: string;
+    size?: ButtonSize;
+    type?: ButtonType;
+}
+
+const { iconName, size='md', type='primary' } = Astro.props;
+---
+
+<button class:list={
+    [
+        'flex',
+        'justify-center',
+        'items-center',
+        'icon-button',
+        'rounded-full',
+        size,
+        type,
+        'transition-all',
+        'ease-in-out',
+        'duration-300',
+    ]
+}>
+    <Icon 
+        name={`mdi:${iconName}`}
+        class="text-color-paper-100"       
+    />
+</button>
+
+<style>
+    .icon-button {
+        &.sm {
+            width: 40px;
+            height: 40px;
+
+            [data-icon] {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        &.md {
+            width: 50px;
+            height: 50px;
+
+            [data-icon] {
+                width: 28px;
+                height: 28px;
+            }
+        }
+        &.lg {
+            width: 60px;
+            height: 60px;
+
+            [data-icon] {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    }   
+</style>

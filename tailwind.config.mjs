@@ -7,8 +7,8 @@ export default {
 			'white': '#FFFFFF',
 			'paper-100': "#FFFAF7",
 			'paper-200': "#F2EDEB",
-			'blue-400': '#046BCD',
 			'blue-200': '#68a6E1',
+			'blue-400': '#046BCD',
 			'gray': '#838383',
 			'black': '#333333',
 		},
@@ -70,10 +70,27 @@ export default {
 					color: theme('colors.blue-400'),
 					fontWeight: theme('fontWeight.bold')
 				},
-				'.navbar-item__active': {
+				'.navbar-item.active': {
 					color: theme('colors.blue-400'),
 					fontWeight: theme('fontWeight.bold')
 				},
+				'.icon-button.primary': {
+					backgroundColor: theme('colors.blue-200'),
+					color: theme('colors.paper-100'),
+				},
+				'.icon-button.primary:hover': {
+					backgroundColor: theme('colors.blue-400'),
+				},
+				'.icon-button.secondary': {
+					backgroundColor: theme('colors.paper-100'),
+					color: theme('colors.gray'),
+				},
+				'.icon-button.secondary:hover': {
+					backgroundColor: theme('colors.paper-200'),
+				},
+				'.icon-button': {
+					backgroundColor: '#000',
+				}
 			});
 		},
 	],
