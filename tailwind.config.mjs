@@ -74,18 +74,18 @@ export default {
 					color: theme('colors.blue-400'),
 					fontWeight: theme('fontWeight.bold')
 				},
-				'.button-primary': {
+				'.button.primary': {
 					backgroundColor: theme('colors.blue-200'),
 					color: theme('colors.paper-100'),
 				},
-				'.button-primary:hover': {
+				'.button.primary:hover': {
 					backgroundColor: theme('colors.blue-400'),
 				},
-				'.button-secondary': {
+				'.button.secondary': {
 					backgroundColor: theme('colors.paper-100'),
 					color: theme('colors.gray'),
 				},
-				'.button-secondary:hover': {
+				'.button.secondary:hover': {
 					backgroundColor: theme('colors.paper-200'),
 				},
 			});
