@@ -81,11 +81,17 @@ export default {
 				'.button.primary:hover': {
 					backgroundColor: theme('colors.blue-400'),
 				},
+				'.button.primary.active': {
+					backgroundColor: theme('colors.blue-400'),
+				},
 				'.button.secondary': {
 					backgroundColor: theme('colors.paper-100'),
 					color: theme('colors.gray'),
 				},
 				'.button.secondary:hover': {
+					backgroundColor: theme('colors.paper-200'),
+				},
+				'.button.secondary.active': {
 					backgroundColor: theme('colors.paper-200'),
 				},
 			});

@@ -1,0 +1,22 @@
+<div class="button-group flex">
+    <slot />
+</div> 
+
+<style is:global>
+    .button-group {
+        margin: 3rem;
+
+        .button:not(:first-of-type),
+        .button:not(:last-of-type) {
+            @apply rounded-none;
+        }
+
+        .button:first-of-type {
+            @apply rounded-l-full;
+        }
+
+        .button:last-of-type {
+            @apply rounded-r-full;
+        }
+    }
+</style>
