@@ -74,23 +74,20 @@ export default {
 					color: theme('colors.blue-400'),
 					fontWeight: theme('fontWeight.bold')
 				},
-				'.icon-button.primary': {
+				'.button-primary': {
 					backgroundColor: theme('colors.blue-200'),
 					color: theme('colors.paper-100'),
 				},
-				'.icon-button.primary:hover': {
+				'.button-primary:hover': {
 					backgroundColor: theme('colors.blue-400'),
 				},
-				'.icon-button.secondary': {
+				'.button-secondary': {
 					backgroundColor: theme('colors.paper-100'),
 					color: theme('colors.gray'),
 				},
-				'.icon-button.secondary:hover': {
+				'.button-secondary:hover': {
 					backgroundColor: theme('colors.paper-200'),
 				},
-				'.icon-button': {
-					backgroundColor: '#000',
-				}
 			});
 		},
 	],

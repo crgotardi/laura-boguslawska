@@ -1,65 +1,64 @@
 ---
 import { Icon } from 'astro-icon/components'
-
 import type { ButtonSize, ButtonType } from '@typings/Button';
 
 interface Props {
-    iconName: string;
-    size?: ButtonSize;
-    type?: ButtonType;
+    type: ButtonType,
+    size: ButtonSize,
+    label: string,
+    iconName?: string,
 }
 
-const { iconName, size='md', type='primary' } = Astro.props;
+const { size='md', type='primary', label, iconName } = Astro.props;
 ---
-
-<button class:list={
-    [
+<button
+    class:list={[
+        'button',
+        'rounded-full',
         'flex',
         'justify-center',
         'items-center',
-        'icon-button',
-        'rounded-full',
+        'gap-1',
+        'p',
+        'py-1',
         size,
         `button-${type}`,
         'transition-all',
         'ease-in-out',
         'duration-300',
-    ]
-}>
-    <Icon 
-        name={`mdi:${iconName}`}
-        class="text-color-paper-100"       
-    />
+    ]}
+>
+    { iconName && (
+        <Icon 
+            name={`mdi:${iconName}`}
+            class="text-color-paper-100"  
+        />
+    ) }
+    { label }
 </button>
 
 <style>
-    .icon-button {
+    .button {
         &.sm {
-            width: 40px;
-            height: 40px;
-
+            @apply text-xs px-4;
             [data-icon] {
                 width: 20px;
                 height: 20px;
             }
         }
         &.md {
-            width: 50px;
-            height: 50px;
-
+            @apply px-6;
             [data-icon] {
                 width: 28px;
                 height: 28px;
             }
         }
         &.lg {
-            width: 60px;
-            height: 60px;
-
+            @apply text-xl px-8;
             [data-icon] {
                 width: 35px;
                 height: 35px;
             }
         }
-    }   
+    } 
 </style>
