@@ -1,0 +1,59 @@
+---
+import Label from './Label.astro'
+import HelperText from './HelperText.astro'
+
+interface Props {
+    id: string,
+    name: string,
+    placeholder: string,
+    label: string,
+    ariaLabel: string,
+    error: boolean,
+    helperText: string;
+    rows: string;
+    cols: string;
+}
+
+const { 
+    id, 
+    name, 
+    label, 
+    ariaLabel, 
+    placeholder, 
+    error,
+    helperText,
+    rows,
+    cols
+} = Astro.props;
+---
+
+<div 
+    class="form-section flex flex-col"
+    aria-label="Form section"
+>
+    <Label id={id}>
+        {label}
+    </Label>
+    <textarea
+        id={id}
+        class:list={[
+            'text-sm',
+            'text-gray',
+            'form-input',
+            'rounded',
+            'bg-paper-200',
+            'px-4',
+            'py-2',
+            'outline-none',
+            { 'border-solid border-2 border-danger': error }
+        ]}
+        name={name}
+        aria-label={ariaLabel}
+        placeholder={placeholder}
+        rows={rows}
+        cols={cols}
+    />
+    <HelperText error={error}>
+        {helperText}
+    </HelperText>
+</div>

@@ -1,0 +1,14 @@
+---
+interface Props {
+    id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<label
+    for={id}
+    class="ml-4 text-sm text-gray"
+>
+    <slot />
+</label>

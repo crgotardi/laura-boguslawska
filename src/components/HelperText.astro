@@ -1,0 +1,19 @@
+---
+interface Props {
+    error: boolean,
+}
+
+const { error } = Astro.props
+---
+
+<span 
+    class:list={[
+        'helper-text',
+        'text-xs',
+        'text-gray',
+        'ml-4',
+        { 'text-danger': error }
+    ]}
+>
+    <slot />
+</span>

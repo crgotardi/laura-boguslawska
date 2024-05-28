@@ -1,34 +1,22 @@
 ---
-import Button from '@components/Button.astro';
-import ButtonGroup from '@components/ButtonGroup.astro';
 import Layout from '@layouts/Layout.astro';
+import TextArea from '@components/TextArea.astro';
 ---
 
 <Layout title="">
 	<main>
 		MAIN
-		<ButtonGroup>
-			<Button
-				label="AAAA"
-				type="primary"
-				size="md"
-			/>
-			<Button 
-				label="BBBB"
-				type="primary"
-				size="md"
-			/>
-			<Button 
-				label="CCCC"
-				type="primary"
-				size="md"
-			/>
-			<Button 
-				label="DDDD"
-				type="primary"
-				size="md"
-			/>
-		</ButtonGroup>
+		<TextArea
+			id="id"
+			name="name"
+			placeholder="placeholder"
+			label="Label"
+			ariaLabel="Aria Label"
+			error={true}
+			helperText="Helper hext"
+			rows="3"
+			cols="4"
+		></TextArea>
 	</main>
 </Layout>
 

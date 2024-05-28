@@ -11,6 +11,7 @@ export default {
 			'blue-400': '#046BCD',
 			'gray': '#838383',
 			'black': '#333333',
+			'danger': '#dc2626'
 		},
 		fontFamily: {
 			sans: ['Niramit', 'sans-serif'],

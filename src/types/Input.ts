@@ -1,0 +1,1 @@
+export type InputType = 'text' | 'number' | 'tel' | 'email' | 'url' | 'search' | 'password'
