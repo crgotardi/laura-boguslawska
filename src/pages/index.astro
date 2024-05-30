@@ -1,12 +1,28 @@
 ---
 import Layout from '@layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import Art1 from '@assets/art-1.png'
 ---
 
 <Layout title="">
-	<main>
-		MAIN
+	<main class="container flex m-auto">
+		<section class="flex-1 pl-10 flex flex-col justify-center">
+			<h1 class="heading w-72 leading-none z-10 mb-10">
+				Laura Boguslawska
+			</h1>
+			<p class="mb-48 text-xl">
+				Welcome to my gallery of <br>
+				<span class="font-bold text-blue-200">soulful expressions</span>
+			</p>
+		</section>
+		<section class="flex-1 flex justify-center items-center">
+			<Image src={Art1} alt="art painting" class="-mr-32 fixed right-1/3" />
+		</section>
 	</main>
 </Layout>
 
 <style>
+	main {
+		min-height: calc(100dvh - 94px);
+	}
 </style>
