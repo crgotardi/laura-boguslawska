@@ -1,0 +1,83 @@
+---
+import IconButton from './IconButton.astro';
+
+type DialogWidth = 'sm' | 'md' | 'lg' | 'full';
+type DialogPosition = 'top' | 'center' | 'bottom';
+
+interface Props {
+    id: string;
+    maxWidth?: DialogWidth,
+    fullScreen?: boolean,
+    verticalPosition?: DialogPosition
+    ariaDescribedby: string,
+    onClose?: () => void,
+}
+
+const {
+    id,
+    maxWidth,
+    fullScreen,
+    verticalPosition = 'center',
+    ariaDescribedby,
+    onClose,
+} = Astro.props
+---
+
+<button>A</button>
+<dialog
+    id={id}
+    aria-describedby={ariaDescribedby}
+    class:list={[
+        'dialog',
+        `dialog-${maxWidth}`,
+        `dialog-${verticalPosition}`,
+        'fixed',
+        'top-10',
+        'left-1/2',
+        'p-4',
+        'rounded-md',
+        'shadow-lg',
+        'overflow-auto',
+        'z-20',
+        {
+            'max-w-full': fullScreen
+        }
+    ]}
+>
+    <div id="dialog-container">
+        <div class="dialog-header">
+            <slot name="dialog-header"></slot>
+            <IconButton 
+                iconName="close"
+                size="sm"
+            />
+        </div>
+        <div class="dialog-body">
+            <slot name="dialog-body"></slot>
+        </div>
+        <div class="dialog-footer">
+            <slot name="dialog-footer"></slot> 
+        </div>
+    </div>
+</dialog>
+
+<style>
+    .dialog {
+        transform: translate(-50%, -10%);
+    }
+</style>
+
+<script>
+    const dialog = document.querySelector("dialog");
+    const closeButton = document.querySelector("dialog button");
+
+    closeButton?.addEventListener('click', () => {
+        dialog?.close();
+    });
+
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape') {
+            dialog?.close();
+        }
+    })
+</script>
