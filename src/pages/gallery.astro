@@ -1,0 +1,33 @@
+---
+import Layout from '@layouts/Layout.astro';
+import MansoryLayout from '@layouts/MansoryLayout.astro';
+import { Image } from 'astro:assets';
+import gallery from '@data/gallery.ts';
+import Art1 from '@assets/art-1.png'
+
+
+---
+<Layout title="">
+    <MansoryLayout title="Art Gallery">
+        {gallery.map(image => (
+            <div class="flex justify-center gallery-image">
+                <Image 
+                    src={image.src} 
+                    alt={image.alt}
+                    width={300}
+                    class="cursor-pointer hover:scale-110 transition-all ease-in-out duration-150"
+                />
+            </div>
+        ))}
+    </MansoryLayout>
+</Layout>
+<section>
+
+</section>
+
+<style>
+    .gallery-image:nth-child(3n+2) img {
+        margin-top: -50px;
+        margin-bottom: 50px;
+    }
+</style>

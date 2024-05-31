@@ -3,8 +3,8 @@ import Navbar from '@components/Navbar.astro';
 import NavbarItem from '@components/NavbarItem.astro';
 import Sidebar from '@components/Sidebar.astro';
 import SidebarIcon from '@components/SidebarIcon.astro';
-import MenuItems from '@data/navbar';
-import SidebarIcons from '@data/sidebar';
+import MenuItems from '@data/navbar.ts';
+import SidebarIcons from '@data/sidebar.ts';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -41,7 +41,9 @@ const { title } = Astro.props;
 				/>
 			)}
 		</Navbar>
-		<slot />
+		<main class="container m-auto">
+			<slot />
+		</main>
 		<Sidebar>
 			{SidebarIcons.map((item) => 
 				<SidebarIcon 
@@ -65,5 +67,6 @@ const { title } = Astro.props;
 	body {
 		line-height: 1.5;
 		-webkit-font-smoothing: antialiased;
+		overflow-x: hidden;
 	}
 </style>
