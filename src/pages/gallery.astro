@@ -3,27 +3,69 @@ import Layout from '@layouts/Layout.astro';
 import MansoryLayout from '@layouts/MansoryLayout.astro';
 import { Image } from 'astro:assets';
 import gallery from '@data/gallery.ts';
-import Art1 from '@assets/art-1.png'
-
-
+import Dialog from '@components/Dialog.astro';
 ---
+
 <Layout title="">
     <MansoryLayout title="Art Gallery">
         {gallery.map(image => (
             <div class="flex justify-center gallery-image">
-                <Image 
-                    src={image.src} 
+                <Image
+                    id={`${image.id}`}
+                    src={image.data}
                     alt={image.alt}
+                    data-title={image.title}
+                    data-width={image.width}
+                    data-height={image.height}
+                    data-material={image.material}
                     width={300}
-                    class="cursor-pointer hover:scale-110 transition-all ease-in-out duration-150"
+                    role="button"
+                    class:list={[
+                        `
+                            cursor-pointer
+                            hover:scale-110 
+                            transition-all 
+                            ease-in-out 
+                            duration-150
+                            dialog-trigger
+                        `
+                    ]}
                 />
             </div>
         ))}
+
+       <Dialog
+            id="dialog"
+            maxWidth="md"
+            ariaDescribedby="Dialog"            
+        >
+            <div slot="dialog-header">
+            </div>
+            <div slot="dialog-body">
+                <div class="flex gap-40">
+                    <img 
+                        id="dialog-image"
+                        class="w-6/12"
+                    >
+                    <div class="mt-20 w-3/12">
+                        <h3
+                            id="dialog-title"
+                            class="heading mb-8"
+                        ></h3>
+                        <div class="mb-4 flex justify-between">
+                            <p id="art-material">Material</p>
+                            <p id="art-material">asfsaf</p>
+                        </div>
+                        <div class="flex justify-between">
+                            <p id="art-height">Dimensões</p>
+                            <p id="art-height">safasf</p>
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+        </Dialog>
     </MansoryLayout>
 </Layout>
-<section>
-
-</section>
 
 <style>
     .gallery-image:nth-child(3n+2) img {
@@ -31,3 +73,57 @@ import Art1 from '@assets/art-1.png'
         margin-bottom: 50px;
     }
 </style>
+
+<script>
+    interface ListenerObject {
+        trigger: HTMLElement;
+        listener: any
+    }
+
+    let triggers: NodeListOf<HTMLElement>;
+    let listeners: ListenerObject[] = [];
+
+    function init() {
+        triggers = document.querySelectorAll('.dialog-trigger')
+        listeners = [];
+    
+        triggers?.forEach(trigger => {
+            const listener= trigger.addEventListener('click', showModal)
+            listeners.push({
+                listener: listener,
+                trigger: trigger,
+            })
+        })
+    }
+
+    function showModal(event: Event) {
+        const dialog: HTMLDialogElement | null = document.querySelector('#dialog');
+
+        if (!dialog) return;
+
+        const dialogImage: HTMLImageElement | null = document.querySelector('#dialog-image');        
+        const dialogTitle: HTMLElement | null = document.querySelector('#dialog-title');   
+        const selectedImage = event.target as HTMLImageElement;
+
+        if (dialogImage) {
+            dialogImage.src = selectedImage.src
+            dialogImage.alt = selectedImage.alt
+        }
+
+        if (dialogTitle) {
+            dialogTitle.innerHTML = selectedImage.dataset.title || ''
+        }
+
+
+        dialog.showModal()
+     }
+
+    document.addEventListener('astro:before-swap', () => {
+        listeners?.forEach(item => {
+            item.trigger.removeEventListener('click', item.listener);
+        });
+    });
+
+     document.addEventListener("astro:after-swap", init);
+     init()
+</script>
