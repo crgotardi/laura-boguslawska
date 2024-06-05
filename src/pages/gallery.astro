@@ -39,26 +39,33 @@ import Dialog from '@components/Dialog.astro';
             maxWidth="md"
             ariaDescribedby="Dialog"            
         >
-            <div slot="dialog-header">
-            </div>
+            <div slot="dialog-header"></div>
             <div slot="dialog-body">
-                <div class="flex gap-40">
+                <div class="flex gap-24">
                     <img 
                         id="dialog-image"
                         class="w-6/12"
                     >
-                    <div class="mt-20 w-3/12">
+                    <div class="mt-20 w-4/12">
                         <h3
                             id="dialog-title"
                             class="heading mb-8"
                         ></h3>
                         <div class="mb-4 flex justify-between">
-                            <p id="art-material">Material</p>
+                            <p 
+                                class="text-gray font-light"
+                            >
+                                Material
+                            </p>
                             <p id="art-material">asfsaf</p>
                         </div>
                         <div class="flex justify-between">
-                            <p id="art-height">Dimensões</p>
-                            <p id="art-height">safasf</p>
+                            <p 
+                                class="text-gray font-light"
+                            >
+                                Dimensões
+                            </p>
+                            <p id="art-dimensions"></p>
                         </div>                    
                     </div>
                 </div>
@@ -71,6 +78,28 @@ import Dialog from '@components/Dialog.astro';
     .gallery-image:nth-child(3n+2) img {
         margin-top: -50px;
         margin-bottom: 50px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: view()) {
+            .gallery-image {
+                animation: fade linear both;
+                animation-range: entry 10% contain 25%;
+                animation-timeline: view();
+                view-timeline: --subjectReveal block;
+            }
+        }
+    }
+
+    @keyframes fade {
+        0% {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        80% {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 </style>
 
@@ -101,22 +130,40 @@ import Dialog from '@components/Dialog.astro';
 
         if (!dialog) return;
 
-        const dialogImage: HTMLImageElement | null = document.querySelector('#dialog-image');        
-        const dialogTitle: HTMLElement | null = document.querySelector('#dialog-title');   
         const selectedImage = event.target as HTMLImageElement;
 
-        if (dialogImage) {
-            dialogImage.src = selectedImage.src
-            dialogImage.alt = selectedImage.alt
-        }
+        setModalImage(selectedImage)
+        setModalContent(selectedImage)
+
+        dialog.showModal()
+     }
+
+    function setModalContent(selectedImage: HTMLImageElement) {
+        const dialogTitle: HTMLElement | null = document.querySelector('#dialog-title');
+        const artMaterial: HTMLElement | null = document.querySelector('#art-material');
+        const artDimensions: HTMLElement | null = document.querySelector('#art-dimensions');
 
         if (dialogTitle) {
             dialogTitle.innerHTML = selectedImage.dataset.title || ''
         }
 
+        if (artMaterial) {
+            artMaterial.innerHTML = selectedImage.dataset.material || ''
+        }
 
-        dialog.showModal()
-     }
+        if (artDimensions) {
+            artDimensions.innerHTML = `${selectedImage.dataset.width} cm x ${selectedImage.dataset.height} cm` || ''
+        }
+    }
+
+    function setModalImage(selectedImage: HTMLImageElement) {
+        const dialogImage: HTMLImageElement | null = document.querySelector('#dialog-image');
+
+        if (dialogImage) {
+            dialogImage.src = selectedImage.src
+            dialogImage.alt = selectedImage.alt
+        }
+    }
 
     document.addEventListener('astro:before-swap', () => {
         listeners?.forEach(item => {
@@ -124,6 +171,6 @@ import Dialog from '@components/Dialog.astro';
         });
     });
 
-     document.addEventListener("astro:after-swap", init);
-     init()
+    document.addEventListener("astro:after-swap", init);
+    init()
 </script>
