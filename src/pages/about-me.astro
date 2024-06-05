@@ -6,33 +6,37 @@ import Art1 from '@assets/art-1.png'
 
 <Layout title="">
 	<main>
-		<section class="flex">
-			<div class="flex-1 flex flex-col">
-				<h2 class="heading leading-none z-10 mb-10">
+		<section class="flex items-start">
+			<div class="flex-1 flex justify-center flex-col">
+				<h2 class="heading leading-none z-10 text-nowrap mb-10">
 					Witaj na moim profilu!
 				</h2>
-				<p>
+				<p class="text-justify">
 					Jestem Laura, pochodzę z Polski a obecnie mieszkam w Krakowie. 
 					Sztuką zajmuję się od zawsze i od lat jest to moja największa pasja.
 				</p>
 				<br>
-				<p>
+				<p class="text-justify">
 					Na  stronie chcę się podzielić z Tobą tym, co tworzę.
 					Malarstwo, rysunek i literatura są niezwykle bliskie mojemu sercu, 
 				</p>
 				<br>
-				<p>
+				<p class="text-justify">
 					Clatego w ostatnim czasie postanowiłam im poświęcić więcej czasu, co zaowocowało powstaniem tej strony. 
 					Mam nadzieję, że znajdziesz tu coś dla siebie :) 
 				</p>
 				<br>
-				<p>
+				<p class="text-justify">
 					Podoba Ci się to, co robię? 
 					<span class="font-bold text-blue-200">Porozmawiajmy!</span>
 				</p>
 			</div>
-			<div class="flex-1 flex justify-center items-center">
-				<Image src={Art1} alt="art painting" />
+			<div class="flex-1 flex justify-end items-center">
+				<Image 
+					src={Art1} 
+					alt="art painting"
+					width={450}
+				/>
 			</div>
 		</section>
 	</main>

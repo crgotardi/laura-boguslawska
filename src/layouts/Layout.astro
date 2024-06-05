@@ -41,7 +41,7 @@ const { title } = Astro.props;
 				/>
 			)}
 		</Navbar>
-		<main class="container m-auto">
+		<main class="container m-auto p-12">
 			<slot />
 		</main>
 		<Sidebar>
@@ -68,5 +68,16 @@ const { title } = Astro.props;
 		line-height: 1.5;
 		-webkit-font-smoothing: antialiased;
 		overflow-x: hidden;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 96px;
+		grid-template-rows: auto;
+		grid-template-areas: 
+			"header header header header"
+			"main main main sidebar"
+			"footer footer footer footer";
+	}
+
+	.container {
+		grid-area: main;
 	}
 </style>
