@@ -1,0 +1,36 @@
+---
+import Layout from '@layouts/Layout.astro';
+import MansoryLayout from '@layouts/MansoryLayout.astro';
+import poems from '@data/poems.ts';
+---
+
+<Layout title="">
+    <MansoryLayout title="Poems" cols={2}>
+        {poems.map(poem => (
+            <div id={`poem-${poem.id}`} class="poem mb-24">
+                <h3 class="heading mb-12">
+                    {poem.title}
+                </h3>
+                <p class="text-gray" set:html={poem.content}></p>
+            </div>
+        ))}
+    </MansoryLayout>
+</Layout>
+
+<style>
+    @import '@styles/animations.css';
+
+    .poem:nth-child(odd) {
+        margin-top: -75px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        @supports (animation-timeline: view()) {
+            .poem {
+                animation: fade-in linear both;
+                animation-range: entry 10% contain 25%;
+                animation-timeline: view();
+            }
+        }
+    }
+</style>

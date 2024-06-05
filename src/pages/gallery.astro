@@ -9,7 +9,7 @@ import Dialog from '@components/Dialog.astro';
 <Layout title="">
     <MansoryLayout title="Art Gallery">
         {gallery.map(image => (
-            <div class="flex justify-center gallery-image">
+            <div class="flex justify-center gallery-image mb-24">
                 <Image
                     id={`${image.id}`}
                     src={image.data}
@@ -75,6 +75,8 @@ import Dialog from '@components/Dialog.astro';
 </Layout>
 
 <style>
+    @import '@styles/animations.css';
+
     .gallery-image:nth-child(3n+2) img {
         margin-top: -50px;
         margin-bottom: 50px;
@@ -83,22 +85,10 @@ import Dialog from '@components/Dialog.astro';
     @media (prefers-reduced-motion: no-preference) {
         @supports (animation-timeline: view()) {
             .gallery-image {
-                animation: fade linear both;
+                animation: fade-in linear both;
                 animation-range: entry 10% contain 25%;
                 animation-timeline: view();
-                view-timeline: --subjectReveal block;
             }
-        }
-    }
-
-    @keyframes fade {
-        0% {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        80% {
-            opacity: 1;
-            transform: scale(1);
         }
     }
 </style>
