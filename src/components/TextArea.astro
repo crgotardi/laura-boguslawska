@@ -9,9 +9,9 @@ interface Props {
     label: string,
     ariaLabel: string,
     error: boolean,
-    helperText: string;
-    rows: string;
-    cols: string;
+    helperText?: string;
+    rows?: string;
+    cols?: string;
 }
 
 const { 
@@ -22,13 +22,13 @@ const {
     placeholder, 
     error,
     helperText,
-    rows,
-    cols
+    rows="3",
+    cols="3"
 } = Astro.props;
 ---
 
 <div 
-    class="form-section flex flex-col"
+    class="form-section flex flex-col mb-6"
     aria-label="Form section"
 >
     <Label id={id}>

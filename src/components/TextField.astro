@@ -11,7 +11,7 @@ interface Props {
     label: string,
     ariaLabel: string,
     error: boolean,
-    helperText: string;
+    helperText?: string;
 }
 
 const { 
@@ -27,7 +27,7 @@ const {
 ---
 
 <div 
-    class="form-section flex flex-col"
+    class="form-section flex flex-col mb-6"
     aria-label="Form section"
 >
     <Label id={id}>

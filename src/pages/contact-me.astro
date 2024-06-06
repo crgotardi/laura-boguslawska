@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+import LauraBoguslawska from '@assets/laura-boguslawska.png'
+import TextField from '@components/TextField.astro';
+import TextArea from '@components/TextArea.astro';
+import Button from '@components/Button.astro';
+import IconButton from '@components/IconButton.astro';
+import Avatar from '@components/Avatar.astro';
+import Layout from '@layouts/Layout.astro';
+---
+
+<Layout title="">
+	<section>
+		<div class="flex items-start">
+			<div class="flex-1" >
+				<h2 class="heading mb-6">
+					Contact me
+				</h2>
+				<form class="w-8/12">
+					<TextField
+						id="name"
+						name="name"
+						placeholder="Enter with your name"
+						label="Your name"
+						ariaLabel="Name input"
+						type="text"
+						error={false}
+						helperText=""
+					/>
+					<TextField
+						id="email"
+						name="email"
+						placeholder="Enter with your e-mail"
+						label="Your e-mail"
+						ariaLabel="E-mail input"
+						type="email"
+						error={false}
+						helperText=""
+					/>
+					<TextField
+						id="phone"
+						name="phone"
+						placeholder="Enter with your phone"
+						label="Your phone (optional)"
+						ariaLabel="Phone input"
+						type="tel"
+						error={false}
+						helperText=""
+					/>
+					<TextArea
+						id="message"
+						name="message"
+						placeholder="Enter with your message"
+						label="Your message"
+						ariaLabel="Message input"
+						error={false}
+						helperText=""
+					/>
+					<Button 
+						type="primary"
+						size="md"
+						label="Submit"
+					/>
+				</form>
+			</div>
+			<div class="flex-1 flex flex-col justify-center items-center m-auto">
+				<Avatar
+					src={LauraBoguslawska}
+					alt="Laura Boguslawska's profile picture"
+					width={220}
+					height={220}
+				/>
+				<h5 class="heading">Laura Boguslawska</h5>
+				<div class="flex">
+					<IconButton 
+						type="secondary"
+						iconName="instagram"
+					/>
+					<IconButton 
+						type="secondary"
+						iconName="facebook"
+					/>
+					<IconButton 
+						type="secondary"
+						iconName="whatsapp"
+					/>
+					<IconButton 
+						type="secondary"
+						iconName="linkedin"
+					/>
+				</div>
+				<div id="map"></div>
+			</div>
+		</div>
+	</section>
+</Layout>
