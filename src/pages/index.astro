@@ -1,7 +1,5 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import Art1 from '@assets/art-1.png'
 ---
 
 <Layout title="">
@@ -26,8 +24,6 @@ import Art1 from '@assets/art-1.png'
 </Layout>
 
 <style>
-	@import '@styles/animations.css';
-
 	.container {
 		min-height: calc(100dvh - 94px);
 	}
@@ -47,29 +43,25 @@ import Art1 from '@assets/art-1.png'
 
 <script>
 	import gallery from "@data/gallery";
-	let index = 0;
-
-	const imageElement = document.querySelector('#image-art') as HTMLImageElement; 
-	let newImageUrl = gallery[index].data.src;
-	imageElement.src = newImageUrl;
-	index++;
 
 	function changeImage() {
-		setInterval(() => {
-			imageElement?.classList.add('hidden');
+		let index = getRandomIndex()
 
-			setTimeout(() => {
-				newImageUrl = gallery[index].data.src;
-	
-				if (imageElement) {
-					imageElement.src = newImageUrl;
-					imageElement.classList.remove('hidden');
-	
-					index = index < gallery.length-1 ? index + 1 : 0
-				}
-			}, 300)
-		}, 3000); 
+		const imageElement = document.querySelector('#image-art') as HTMLImageElement; 
+		let newImageUrl = gallery[index].data.src;
+		imageElement.src = newImageUrl;
+
+		if (imageElement) {
+			imageElement.src = newImageUrl;
+			imageElement.classList.remove('hidden');
+		}
 	}
+
+	function getRandomIndex() {
+		return Math.floor(Math.random() * gallery.length);
+	}
+
+	document.addEventListener("astro:after-swap", changeImage);
 
 	changeImage();
 </script>
