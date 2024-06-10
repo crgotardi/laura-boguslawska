@@ -1,10 +1,14 @@
 ---
+import { fade } from 'astro:transitions';
 import Layout from '@layouts/Layout.astro';
 ---
 
 <Layout title="">
 	<section class="flex">
-		<div class="flex-1 pl-10 flex flex-col justify-center">
+		<div 
+			class="flex-1 pl-10 flex flex-col justify-center"
+			transition:animate={fade({ duration: '0.5s' })}
+		>
 			<h1 class="heading w-72 leading-none z-10 mb-10">
 				Laura Boguslawska
 			</h1>
@@ -14,54 +18,128 @@ import Layout from '@layouts/Layout.astro';
 			</p>
 		</div>
 		<div class="flex-1 flex justify-center items-center">
-			<img 
-				id="image-art"
-				class="art rounded-md"
-				src=""
-				alt="art painting"			>
+			<div class=
+				`
+					image-stack 
+					inline-block 
+					text-center
+					rounded
+					relative 
+					left-2/4 
+					translate-x-10
+				`
+			>
+			</div>
 		</div>
 	</section>
 </Layout>
 
 <style>
+	@import '@styles/animations.css';
+
 	.container {
 		min-height: calc(100dvh - 94px);
 	}
 
-	.art {
-		animation: fade-in linear both;
-		transition: all ease-in-out 0.3s;
-		opacity: 1;
-		max-height: 500px;
+	.image-stack {
+		width: 500px;
+		height: 500px;
 	}
 
-	.art.hidden {
-		opacity: 0;
-		transition: all ease-in-out 0.3s;
-	}
+	.fade-in {
+      animation: fade-in 0.5s ease-in-out;
+    }
 </style>
 
 <script>
 	import gallery from "@data/gallery";
+	let stack: HTMLElement | null = null;
 
-	function changeImage() {
-		let index = getRandomIndex()
+	function createImageElements() {
+		stack = document.querySelector('.image-stack');
+		if (stack) stack.innerHTML = '';
 
-		const imageElement = document.querySelector('#image-art') as HTMLImageElement; 
-		let newImageUrl = gallery[index].data.src;
-		imageElement.src = newImageUrl;
+		const imagesIndex = getRandomImageIndexes();
+		let multiplier = 1;
 
-		if (imageElement) {
-			imageElement.src = newImageUrl;
-			imageElement.classList.remove('hidden');
+		for (let index of imagesIndex) {
+			const image = createImageElement(index, multiplier);
+			stack?.appendChild(image);
+			multiplier++
 		}
+	}
+
+	function createImageElement(index: number, multiplier: number) {
+		const image = document.createElement('img');
+		image.id = `art-${index + 1}`;
+		image.src = gallery[index].data.src;
+
+		setImageProperties(image, multiplier)
+
+		return image
+	}
+	
+	function setImageProperties(image: HTMLImageElement, multiplier: number) {
+		image.classList.add('art', 'rounded-md', 'inline-block', 'cursor-pointer');
+		image.style.position = 'absolute';
+		image.style.zIndex = `${1200 - (200 * multiplier)}`;
+		image.style.right = `${(400 - (50 * multiplier))}px`;
+		image.style.height = '450px';
+		image.style.width = '450px';
+		image.style.transform = `scale(${1 - (0.1 * multiplier)})`;
+		image.style.filter = `brightness(${1.2 - (0.2 * multiplier)})`;
+		image.style.transitionProperty = 'all';
+		image.style.transitionDuration = '0.4s';
+		image.style.transitionTimingFunction = 'ease-in-out';
 	}
 
 	function getRandomIndex() {
 		return Math.floor(Math.random() * gallery.length);
 	}
 
-	document.addEventListener("astro:after-swap", changeImage);
+	function getRandomImageIndexes() {
+		const imagesIndex: number[] = []
 
-	changeImage();
+		while (imagesIndex.length < 4) {
+			const index = getRandomIndex()
+	
+			if (!imagesIndex.includes(index)) {
+				imagesIndex.push(index)
+			}
+		}
+
+		return imagesIndex
+	}
+
+	async function changeImage() {
+		let multiplier = 1;
+
+		if (stack) {
+			const arts: any = document.querySelectorAll('.art');
+
+			for (let art of arts) {
+				setImageProperties(art, multiplier);
+				multiplier++
+			}
+
+			const firstImage = arts[0]
+		
+			setTimeout(() => {
+				stack?.appendChild(firstImage)
+			}, 400)
+		}
+	}
+
+	function init() {
+		createImageElements();
+		
+		stack = document.querySelector('.image-stack');
+		stack?.addEventListener('click', changeImage)
+	}
+
+	document.addEventListener("astro:after-swap", () => {
+		init();
+	});
+
+	init();
 </script>
