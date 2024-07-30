@@ -134,7 +134,10 @@ import Layout from '@layouts/Layout.astro';
 		createImageElements();
 		
 		stack = document.querySelector('.image-stack');
-		stack?.addEventListener('click', changeImage)
+
+		setInterval(() => {
+			changeImage()
+		}, 4000)
 	}
 
 	document.addEventListener("astro:after-swap", () => {

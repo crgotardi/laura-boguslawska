@@ -2,14 +2,14 @@
 import Layout from '@layouts/Layout.astro';
 import MansoryLayout from '@layouts/MansoryLayout.astro';
 import { Image } from 'astro:assets';
-import gallery from '@data/gallery.ts';
+import mansory from '@data/mansoryGallery.ts';
 import Dialog from '@components/Dialog.astro';
 ---
 
 <Layout title="">
-    <MansoryLayout title="Art Gallery">
-        {gallery.map(image => (
-            <div class="flex justify-center gallery-image mb-24">
+    <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4">
+            {mansory.firstColumn.map((image, index) => (
                 <Image
                     id={`${image.id}`}
                     src={image.data}
@@ -18,69 +18,123 @@ import Dialog from '@components/Dialog.astro';
                     data-width={image.width}
                     data-height={image.height}
                     data-material={image.material}
-                    width={300}
                     role="button"
                     class:list={[
                         `
+                            h-auto 
+                            max-w-full 
+                            rounded-lg
                             cursor-pointer
                             hover:scale-110 
                             transition-all 
                             ease-in-out 
                             duration-150
                             dialog-trigger
+                            object-cover
                         `
                     ]}
                 />
-            </div>
-        ))}
+            ))}
+        </div>
+        <div class="grid gap-4">
+            {mansory.secondColumn.map((image, index) => (
+                <Image
+                    id={`${image.id}`}
+                    src={image.data}
+                    alt={image.alt}
+                    data-title={image.title}
+                    data-width={image.width}
+                    data-height={image.height}
+                    data-material={image.material}
+                    role="button"
+                    class:list={[
+                        `
+                            h-auto 
+                            max-w-full 
+                            rounded-lg
+                            cursor-pointer
+                            hover:scale-110 
+                            transition-all 
+                            ease-in-out 
+                            duration-150
+                            dialog-trigger
+                            object-cover
+                        `
+                    ]}
+                />
+            ))}
+        </div>
+        <div class="grid gap-4">
+            {mansory.thirdColumn.map((image, index) => (
+                <Image
+                    id={`${image.id}`}
+                    src={image.data}
+                    alt={image.alt}
+                    data-title={image.title}
+                    data-width={image.width}
+                    data-height={image.height}
+                    data-material={image.material}
+                    role="button"
+                    class:list={[
+                        `
+                            h-auto 
+                            max-w-full 
+                            rounded-lg
+                            cursor-pointer
+                            hover:scale-110 
+                            transition-all 
+                            ease-in-out 
+                            duration-150
+                            dialog-trigger
+                            object-cover
+                        `
+                    ]}
+                />
+            ))}
+        </div>
+    </div>
 
-       <Dialog
-            id="dialog"
-            maxWidth="md"
-            ariaDescribedby="Dialog"            
-        >
-            <div slot="dialog-header"></div>
-            <div slot="dialog-body">
-                <div class="flex gap-24">
-                    <img 
-                        id="dialog-image"
-                        class="w-6/12"
-                    >
-                    <div class="mt-20 w-4/12">
-                        <h3
-                            id="dialog-title"
-                            class="heading mb-8"
-                        ></h3>
-                        <div class="mb-4 flex justify-between">
-                            <p 
-                                class="text-gray font-light"
-                            >
-                                Material
-                            </p>
-                            <p id="art-material">asfsaf</p>
-                        </div>
-                        <div class="flex justify-between">
-                            <p 
-                                class="text-gray font-light"
-                            >
-                                Dimensões
-                            </p>
-                            <p id="art-dimensions"></p>
-                        </div>                    
+    <Dialog
+        id="dialog"
+        maxWidth="md"
+        ariaDescribedby="Dialog"            
+    >
+        <div slot="dialog-header"></div>
+        <div slot="dialog-body">
+            <div class="flex gap-24">
+                <img 
+                    id="dialog-image"
+                    class="w-6/12"
+                >
+                <div class="mt-20 w-4/12">
+                    <h3
+                        id="dialog-title"
+                        class="heading mb-8"
+                    ></h3>
+                    <div class="mb-4 flex justify-between">
+                        <p 
+                            class="text-gray font-light"
+                        >
+                            Material
+                        </p>
+                        <p id="art-material"></p>
                     </div>
+                    <div class="flex justify-between">
+                        <p 
+                            class="text-gray font-light"
+                        >
+                            Dimensões
+                        </p>
+                        <p id="art-dimensions"></p>
+                    </div>                    
                 </div>
             </div>
-        </Dialog>
-    </MansoryLayout>
+        </div>
+    </Dialog>
 </Layout>
 
 <style>
     @import '@styles/animations.css';
-
-    .gallery-image:nth-child(3n+2) img {
-        margin-top: -50px;
-        margin-bottom: 50px;
-    }
 
     @media (prefers-reduced-motion: no-preference) {
         @supports (animation-timeline: view()) {
